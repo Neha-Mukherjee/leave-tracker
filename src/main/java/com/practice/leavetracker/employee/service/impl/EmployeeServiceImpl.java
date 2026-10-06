@@ -1,11 +1,12 @@
-package com.practice.leavetracker.service.impl;
+package com.practice.leavetracker.employee.service.impl;
 
-import com.practice.leavetracker.dto.EmployeeDto;
-import com.practice.leavetracker.entity.Employee;
+import com.practice.leavetracker.employee.dto.EmployeeDto;
+import com.practice.leavetracker.employee.entity.Employee;
 import com.practice.leavetracker.exception.ResourceNotFoundException;
-import com.practice.leavetracker.mapper.EmployeeMapper;
-import com.practice.leavetracker.repository.EmployeeRepository;
-import com.practice.leavetracker.service.EmployeeService;
+import com.practice.leavetracker.employee.mapper.EmployeeMapper;
+import com.practice.leavetracker.employee.repository.EmployeeRepository;
+import com.practice.leavetracker.employee.service.EmployeeService;
+import com.practice.leavetracker.leaveBalance.service.LeaveBalanceService;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
+    private final LeaveBalanceService leaveBalanceService;
 
 
     @Override
@@ -37,6 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         Employee savedEmployee = employeeRepository.save(employee);
+        leaveBalanceService.createInitialBalance(savedEmployee);
 
         return employeeMapper.toDto(savedEmployee);
     }

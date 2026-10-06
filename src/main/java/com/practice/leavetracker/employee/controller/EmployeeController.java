@@ -1,9 +1,8 @@
-package com.practice.leavetracker.controller;
+package com.practice.leavetracker.employee.controller;
 
 
-import com.practice.leavetracker.dto.EmployeeDto;
-import com.practice.leavetracker.service.EmployeeService;
-import lombok.AllArgsConstructor;
+import com.practice.leavetracker.employee.dto.EmployeeDto;
+import com.practice.leavetracker.employee.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

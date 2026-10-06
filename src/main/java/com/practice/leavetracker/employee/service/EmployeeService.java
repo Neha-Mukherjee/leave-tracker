@@ -1,6 +1,6 @@
-package com.practice.leavetracker.service;
+package com.practice.leavetracker.employee.service;
 
-import com.practice.leavetracker.dto.EmployeeDto;
+import com.practice.leavetracker.employee.dto.EmployeeDto;
 
 import java.util.List;
 

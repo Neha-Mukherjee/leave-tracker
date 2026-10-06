@@ -1,7 +1,7 @@
-package com.practice.leavetracker.mapper;
+package com.practice.leavetracker.employee.mapper;
 
-import com.practice.leavetracker.dto.EmployeeDto;
-import com.practice.leavetracker.entity.Employee;
+import com.practice.leavetracker.employee.dto.EmployeeDto;
+import com.practice.leavetracker.employee.entity.Employee;
 import org.springframework.stereotype.Component;
 
 
