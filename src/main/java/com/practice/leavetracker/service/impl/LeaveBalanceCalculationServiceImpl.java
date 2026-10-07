@@ -1,7 +1,7 @@
-package com.practice.leavetracker.leaveBalance.service.impl;
+package com.practice.leavetracker.service.impl;
 
-import com.practice.leavetracker.employee.entity.Employee;
-import com.practice.leavetracker.leaveBalance.service.LeaveBalanceCalculationService;
+import com.practice.leavetracker.entity.Employee;
+import com.practice.leavetracker.service.LeaveBalanceCalculationService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

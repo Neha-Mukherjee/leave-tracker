@@ -1,8 +1,8 @@
 package com.practice.leavetracker.auth.service;
 
-import com.practice.leavetracker.employee.entity.Employee;
+import com.practice.leavetracker.entity.Employee;
 import com.practice.leavetracker.exception.ResourceNotFoundException;
-import com.practice.leavetracker.employee.repository.EmployeeRepository;
+import com.practice.leavetracker.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;

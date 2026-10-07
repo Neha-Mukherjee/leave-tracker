@@ -1,6 +1,6 @@
-package com.practice.leavetracker.employee.repository;
+package com.practice.leavetracker.repository;
 
-import com.practice.leavetracker.employee.entity.Employee;
+import com.practice.leavetracker.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

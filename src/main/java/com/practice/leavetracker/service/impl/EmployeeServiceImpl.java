@@ -1,15 +1,21 @@
-package com.practice.leavetracker.employee.service.impl;
+package com.practice.leavetracker.service.impl;
 
-import com.practice.leavetracker.employee.dto.EmployeeDto;
-import com.practice.leavetracker.employee.entity.Employee;
+import com.practice.leavetracker.dto.EmployeeDto;
+import com.practice.leavetracker.dto.LeaveBalanceDto;
+import com.practice.leavetracker.entity.Employee;
+import com.practice.leavetracker.entity.LeaveBalance;
 import com.practice.leavetracker.exception.ResourceNotFoundException;
-import com.practice.leavetracker.employee.mapper.EmployeeMapper;
-import com.practice.leavetracker.employee.repository.EmployeeRepository;
-import com.practice.leavetracker.employee.service.EmployeeService;
-import com.practice.leavetracker.leaveBalance.service.LeaveBalanceService;
+import com.practice.leavetracker.mapper.EmployeeMapper;
+import com.practice.leavetracker.mapper.LeaveBalanceMapper;
+import com.practice.leavetracker.repository.EmployeeRepository;
+import com.practice.leavetracker.repository.LeaveBalanceRepository;
+import com.practice.leavetracker.service.EmployeeService;
+import com.practice.leavetracker.service.LeaveBalanceCalculationService;
+import com.practice.leavetracker.service.LeaveBalanceService;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -88,5 +94,46 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employee.setActive(false);
         employeeRepository.save(employee);
+    }
+
+    @Service
+    @RequiredArgsConstructor
+    public static class LeaveBalanceServiceImpl implements LeaveBalanceService {
+
+        private final LeaveBalanceRepository leaveBalanceRepository;
+        private final LeaveBalanceMapper leaveBalanceMapper;
+        private final LeaveBalanceCalculationService calculationService;
+
+
+        @Override
+        public LeaveBalanceDto createInitialBalance(Employee employee) {
+
+            BigDecimal p1=calculationService.calculatePL(employee);
+            BigDecimal p2=calculationService.calculateCL(employee);
+            BigDecimal p3=calculationService.calculateSL(employee);
+            LeaveBalance leaveBalance = new LeaveBalance(
+                    null,
+                    employee,
+                    employee.getJoiningDate().getYear(),
+                    BigDecimal.ZERO,
+                    BigDecimal.ZERO,
+                    BigDecimal.ZERO,
+                    BigDecimal.ZERO,
+                    BigDecimal.ZERO,
+                    BigDecimal.ZERO
+            );
+
+            LeaveBalance savedBalance =
+                    leaveBalanceRepository.save(leaveBalance);
+
+            return leaveBalanceMapper.toDto(savedBalance);
+        }
+
+        @Override
+        public LeaveBalanceDto getLeaveBalance(Long empId, Integer year) {
+            LeaveBalance leaveBalance=leaveBalanceRepository.findByEmployeeEmpIdAndYear(empId, year)
+                    .orElseThrow();
+            return leaveBalanceMapper.toDto(leaveBalance);
+        }
     }
 }

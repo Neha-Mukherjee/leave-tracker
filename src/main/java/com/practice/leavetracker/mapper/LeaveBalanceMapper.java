@@ -1,9 +1,8 @@
-package com.practice.leavetracker.leaveBalance.mapper;
+package com.practice.leavetracker.mapper;
 
-import com.practice.leavetracker.employee.entity.Employee;
-import com.practice.leavetracker.leaveBalance.dto.LeaveBalanceDto;
-import com.practice.leavetracker.leaveBalance.entity.LeaveBalance;
-import jakarta.persistence.Column;
+import com.practice.leavetracker.entity.Employee;
+import com.practice.leavetracker.dto.LeaveBalanceDto;
+import com.practice.leavetracker.entity.LeaveBalance;
 import org.springframework.stereotype.Component;
 
 @Component

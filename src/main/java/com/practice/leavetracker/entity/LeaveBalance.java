@@ -1,6 +1,5 @@
-package com.practice.leavetracker.leaveBalance.entity;
+package com.practice.leavetracker.entity;
 
-import com.practice.leavetracker.employee.entity.Employee;
 import jakarta.persistence.*;
 import lombok.*;
 

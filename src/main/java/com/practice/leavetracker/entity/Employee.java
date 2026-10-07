@@ -1,4 +1,4 @@
-package com.practice.leavetracker.employee.entity;
+package com.practice.leavetracker.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

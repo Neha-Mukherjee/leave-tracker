@@ -1,6 +1,6 @@
-package com.practice.leavetracker.leaveBalance.repository;
+package com.practice.leavetracker.repository;
 
-import com.practice.leavetracker.leaveBalance.entity.LeaveBalance;
+import com.practice.leavetracker.entity.LeaveBalance;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

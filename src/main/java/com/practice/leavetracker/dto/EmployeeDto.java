@@ -1,4 +1,4 @@
-package com.practice.leavetracker.employee.dto;
+package com.practice.leavetracker.dto;
 
 import java.time.LocalDate;
 

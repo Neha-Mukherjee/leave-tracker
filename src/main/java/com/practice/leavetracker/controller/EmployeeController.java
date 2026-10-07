@@ -1,8 +1,8 @@
-package com.practice.leavetracker.employee.controller;
+package com.practice.leavetracker.controller;
 
 
-import com.practice.leavetracker.employee.dto.EmployeeDto;
-import com.practice.leavetracker.employee.service.EmployeeService;
+import com.practice.leavetracker.dto.EmployeeDto;
+import com.practice.leavetracker.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/LT/employees")
+@RequestMapping("/api/leave-tracker/employees")
 @RequiredArgsConstructor
 public class EmployeeController {
 

@@ -1,6 +1,6 @@
-package com.practice.leavetracker.leaveBalance.service;
+package com.practice.leavetracker.service;
 
-import com.practice.leavetracker.employee.entity.Employee;
+import com.practice.leavetracker.entity.Employee;
 
 import java.math.BigDecimal;
 
