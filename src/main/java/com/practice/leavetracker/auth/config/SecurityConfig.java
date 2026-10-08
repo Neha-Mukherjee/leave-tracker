@@ -22,7 +22,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/leave-tracker/employees/**",
-                                "/api/leave-tracker/leave-requests/**","/error").permitAll()
+                                "/api/leave-tracker/leave-requests/**","/error",
+                                "/api/leave-tracker/company-holidays").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth -> oauth

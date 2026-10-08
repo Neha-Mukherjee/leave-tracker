@@ -87,7 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 //,String role,LocalDate probationEndDate,String designation , Long manager
 
     @Override
-    public void deleteEmployee(Long id) {
+    public void deactivateEmployee(Long id) {
 
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id " + id));
