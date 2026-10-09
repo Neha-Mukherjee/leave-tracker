@@ -7,8 +7,10 @@ import com.practice.leavetracker.exception.ResourceNotFoundException;
 import com.practice.leavetracker.mapper.LeaveRequestMapper;
 import com.practice.leavetracker.repository.EmployeeRepository;
 import com.practice.leavetracker.repository.LeaveRequestRepository;
+import com.practice.leavetracker.service.LeaveBalanceService;
 import com.practice.leavetracker.service.LeaveRequestService;
 import com.practice.leavetracker.service.MedicalDocumentService;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -24,7 +26,7 @@ import java.util.List;
 @Getter
 @Setter
 @RequiredArgsConstructor
-
+@Transactional
 public class LeaveRequestServiceImpl implements LeaveRequestService {
 
 
@@ -32,6 +34,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
     private final LeaveRequestMapper leaveRequestMapper;
     private final EmployeeRepository employeeRepository;
     private final MedicalDocumentService medicalDocumentService;
+    private final LeaveBalanceService leaveBalanceService;
 
     @Override
     public LeaveRequestDto createLeaveRequest(LeaveRequestDto leaveRequestDto,MultipartFile medicalDocument) {
@@ -63,6 +66,9 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
         //calculate duration
         long days = ChronoUnit.DAYS.between(leaveRequestDto.startDate(), leaveRequestDto.endDate()) + 1;
         BigDecimal duration = BigDecimal.valueOf(days);
+
+        leaveBalanceService.validateLeaveBalance(employee.getEmpId(), leaveRequestDto.leaveType(),duration);
+
 
         //validate medical doc
         validateMedicalDocument(leaveRequestDto, duration, medicalDocument);
@@ -105,6 +111,9 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
         }
         if (!status.equals("APPROVED") && !status.equals("REJECTED")) {
             throw new RuntimeException("Invalid status");
+        }
+        if("APPROVED".equals(status)){
+            leaveBalanceService.deductLeaveBalance(leaveRequest.getEmployee().getEmpId(), leaveRequest.getLeaveType(),leaveRequest.getDuration());
         }
 
         leaveRequest.setStatus(status);
