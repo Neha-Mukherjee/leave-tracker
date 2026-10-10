@@ -41,5 +41,11 @@ public class LeaveRequest {
     private String status;
     @Column(name = "applied_at",nullable = false)
     private LocalDateTime appliedAt;
+    @Column(name = "medical_document_name")
+    private String medicalDocumentName;
+
+    @Column(name = "medical_document_path")
+    private String medicalDocumentPath;
+
 
 }

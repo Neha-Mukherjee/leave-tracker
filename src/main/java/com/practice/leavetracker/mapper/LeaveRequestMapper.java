@@ -5,6 +5,8 @@ import com.practice.leavetracker.entity.Employee;
 import com.practice.leavetracker.entity.LeaveRequest;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 public class LeaveRequestMapper {
 
@@ -18,21 +20,25 @@ public class LeaveRequestMapper {
                 leaveRequest.getDuration(),
                 leaveRequest.getReason(),
                 leaveRequest.getStatus(),
-                leaveRequest.getAppliedAt()
+                leaveRequest.getAppliedAt(),
+                leaveRequest.getMedicalDocumentName(),
+                leaveRequest.getMedicalDocumentPath()
         );
     }
 
-    public LeaveRequest toEntity(LeaveRequestDto leaveRequestDto, Employee employee) {
+    public LeaveRequest toEntity(LeaveRequestDto leaveRequestDto, Employee employee, BigDecimal duration, String medicalDocumentName, String medicalDocumentPath) {
         return new LeaveRequest(
                 leaveRequestDto.id(),
                 employee,
                 leaveRequestDto.leaveType(),
                 leaveRequestDto.startDate(),
                 leaveRequestDto.endDate(),
-                leaveRequestDto.duration(),
+                duration,
                 leaveRequestDto.reason(),
                 leaveRequestDto.status(),
-                leaveRequestDto.appliedAt()
+                leaveRequestDto.appliedAt(),
+                medicalDocumentName,
+                medicalDocumentPath
         );
     }
 }
