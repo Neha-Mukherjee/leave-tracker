@@ -7,6 +7,7 @@ import com.practice.leavetracker.exception.ResourceNotFoundException;
 import com.practice.leavetracker.mapper.LeaveRequestMapper;
 import com.practice.leavetracker.repository.EmployeeRepository;
 import com.practice.leavetracker.repository.LeaveRequestRepository;
+import com.practice.leavetracker.service.EmailService;
 import com.practice.leavetracker.service.LeaveBalanceService;
 import com.practice.leavetracker.service.LeaveRequestService;
 import com.practice.leavetracker.service.MedicalDocumentService;
@@ -35,6 +36,7 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
     private final EmployeeRepository employeeRepository;
     private final MedicalDocumentService medicalDocumentService;
     private final LeaveBalanceService leaveBalanceService;
+    private final EmailService emailService;
 
     @Override
     public LeaveRequestDto createLeaveRequest(LeaveRequestDto leaveRequestDto,MultipartFile medicalDocument) {
@@ -123,6 +125,8 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
         leaveRequest.setStatus(status);
         LeaveRequest updatedLeaveRequest=leaveRequestRepository.save(leaveRequest);
+
+        emailService.sendLeaveStatusEmail(updatedLeaveRequest);
         return leaveRequestMapper.toDto(updatedLeaveRequest);
     }
 
