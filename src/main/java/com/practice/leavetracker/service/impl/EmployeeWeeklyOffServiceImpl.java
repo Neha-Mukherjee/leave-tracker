@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
-public class EmpoyeeWeeklyOffServiceImpl implements EmployeeWeeklyOffService {
+public class EmployeeWeeklyOffServiceImpl implements EmployeeWeeklyOffService {
 
     private final EmployeeWeeklyoffRepository employeeWeeklyoffRepository;
     private final EmployeeRepository employeeRepository;
@@ -116,6 +116,8 @@ public class EmpoyeeWeeklyOffServiceImpl implements EmployeeWeeklyOffService {
 
         employeeWeeklyoffRepository
                 .deleteByEmployeeEmpIdAndWeekStartDate(empId, weekStartDate);
+
+        employeeWeeklyoffRepository.flush();
 
         List<EmployeeWeeklyOff> entries = request.daysOff().stream()
                 .map(day -> new EmployeeWeeklyOff(

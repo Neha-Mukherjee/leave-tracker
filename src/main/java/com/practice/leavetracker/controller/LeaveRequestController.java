@@ -44,9 +44,9 @@ public class LeaveRequestController {
 
     //get all leave request
     @GetMapping
-    public ResponseEntity<List<LeaveRequestDto>> getAllLeaveRequests(){
+    public ResponseEntity<List<LeaveRequestDto>> getAllLeaveRequests(@RequestParam(required=false) String status) {
 
-        List<LeaveRequestDto> leaveRequests = leaveRequestService.getAllLeaveRequests();
+        List<LeaveRequestDto> leaveRequests = leaveRequestService.getAllLeaveRequests(status);
 
        return ResponseEntity.ok(leaveRequests);
     }
