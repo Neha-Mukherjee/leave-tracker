@@ -11,7 +11,7 @@ public interface LeaveRequestService {
 
     LeaveRequestDto createLeaveRequest(LeaveRequestDto leaveRequestDto, MultipartFile medicalDocument);
 
-    List<LeaveRequestDto> getAllLeaveRequests();
+    List<LeaveRequestDto> getAllLeaveRequests(String status);
 
     LeaveRequestDto getLeaveRequestById(long id);
 

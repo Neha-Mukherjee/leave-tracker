@@ -91,8 +91,13 @@ public class LeaveRequestServiceImpl implements LeaveRequestService {
 
 
     @Override
-    public List<LeaveRequestDto> getAllLeaveRequests() {
-        return leaveRequestRepository.findAll().stream().map(leaveRequestMapper::toDto).toList();
+    public List<LeaveRequestDto> getAllLeaveRequests(String status) {
+        if(status == null || status.isBlank()){
+            return leaveRequestRepository.findAll().stream().map(leaveRequestMapper::toDto).toList();
+
+        }
+
+        return leaveRequestRepository.findByStatus(status).stream().map(leaveRequestMapper::toDto).toList();
     }
 
     @Override
