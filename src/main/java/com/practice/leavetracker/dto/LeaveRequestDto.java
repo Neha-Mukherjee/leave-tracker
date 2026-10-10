@@ -12,5 +12,7 @@ public record LeaveRequestDto(Long id,
                               BigDecimal duration,
                               String reason,
                               String status,
-                              LocalDateTime appliedAt) {
+                              LocalDateTime appliedAt,
+                              String medicalDocumentName,
+                              String medicalDocumentPath) {
 }

@@ -87,7 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 //,String role,LocalDate probationEndDate,String designation , Long manager
 
     @Override
-    public void deleteEmployee(Long id) {
+    public void deactivateEmployee(Long id) {
 
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id " + id));
@@ -96,44 +96,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.save(employee);
     }
 
-    @Service
-    @RequiredArgsConstructor
-    public static class LeaveBalanceServiceImpl implements LeaveBalanceService {
-
-        private final LeaveBalanceRepository leaveBalanceRepository;
-        private final LeaveBalanceMapper leaveBalanceMapper;
-        private final LeaveBalanceCalculationService calculationService;
-
-
-        @Override
-        public LeaveBalanceDto createInitialBalance(Employee employee) {
-
-            BigDecimal p1=calculationService.calculatePL(employee);
-            BigDecimal p2=calculationService.calculateCL(employee);
-            BigDecimal p3=calculationService.calculateSL(employee);
-            LeaveBalance leaveBalance = new LeaveBalance(
-                    null,
-                    employee,
-                    employee.getJoiningDate().getYear(),
-                    BigDecimal.ZERO,
-                    BigDecimal.ZERO,
-                    BigDecimal.ZERO,
-                    BigDecimal.ZERO,
-                    BigDecimal.ZERO,
-                    BigDecimal.ZERO
-            );
-
-            LeaveBalance savedBalance =
-                    leaveBalanceRepository.save(leaveBalance);
-
-            return leaveBalanceMapper.toDto(savedBalance);
-        }
-
-        @Override
-        public LeaveBalanceDto getLeaveBalance(Long empId, Integer year) {
-            LeaveBalance leaveBalance=leaveBalanceRepository.findByEmployeeEmpIdAndYear(empId, year)
-                    .orElseThrow();
-            return leaveBalanceMapper.toDto(leaveBalance);
-        }
-    }
 }
