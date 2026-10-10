@@ -3,7 +3,6 @@ package com.practice.leavetracker.controller;
 
 import com.practice.leavetracker.dto.EmployeeDto;
 import com.practice.leavetracker.service.EmployeeService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/LT/employees")
+@RequestMapping("/api/leave-tracker/employees")
 @RequiredArgsConstructor
 public class EmployeeController {
 
@@ -44,7 +43,7 @@ public class EmployeeController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable Long id) {
-        employeeService.deleteEmployee(id);
+        employeeService.deactivateEmployee(id);
         return ResponseEntity.ok("Employee deactivated");
     }
 }

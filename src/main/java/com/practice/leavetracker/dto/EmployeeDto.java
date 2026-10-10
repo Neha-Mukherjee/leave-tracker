@@ -1,12 +1,5 @@
 package com.practice.leavetracker.dto;
 
-import com.practice.leavetracker.entity.Employee;
-import jakarta.mail.Address;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
 import java.time.LocalDate;
 
 public record EmployeeDto(Long empId , String firstName , String lastName

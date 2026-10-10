@@ -1,14 +1,21 @@
 package com.practice.leavetracker.service.impl;
 
 import com.practice.leavetracker.dto.EmployeeDto;
+import com.practice.leavetracker.dto.LeaveBalanceDto;
 import com.practice.leavetracker.entity.Employee;
+import com.practice.leavetracker.entity.LeaveBalance;
 import com.practice.leavetracker.exception.ResourceNotFoundException;
 import com.practice.leavetracker.mapper.EmployeeMapper;
+import com.practice.leavetracker.mapper.LeaveBalanceMapper;
 import com.practice.leavetracker.repository.EmployeeRepository;
+import com.practice.leavetracker.repository.LeaveBalanceRepository;
 import com.practice.leavetracker.service.EmployeeService;
+import com.practice.leavetracker.service.LeaveBalanceCalculationService;
+import com.practice.leavetracker.service.LeaveBalanceService;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -20,6 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
+    private final LeaveBalanceService leaveBalanceService;
 
 
     @Override
@@ -37,6 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         Employee savedEmployee = employeeRepository.save(employee);
+        leaveBalanceService.createInitialBalance(savedEmployee);
 
         return employeeMapper.toDto(savedEmployee);
     }
@@ -78,7 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 //,String role,LocalDate probationEndDate,String designation , Long manager
 
     @Override
-    public void deleteEmployee(Long id) {
+    public void deactivateEmployee(Long id) {
 
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id " + id));
@@ -86,4 +95,5 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setActive(false);
         employeeRepository.save(employee);
     }
+
 }
