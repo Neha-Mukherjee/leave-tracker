@@ -18,7 +18,7 @@ public class EmployeeMapper
     public Employee toEntity(EmployeeDto employeeDto) {
         return new Employee(employeeDto.empId(), employeeDto.firstName(), employeeDto.lastName(),
                 employeeDto.email(),employeeDto.joiningDate(), employeeDto.employmentType(),
-                employeeDto.department(), employeeDto.role(), employeeDto.probationEndDate(), employeeDto.designation(),null);
+                employeeDto.department(), employeeDto.role(), employeeDto.probationEndDate(), employeeDto.designation(),null,true);
     }
 }
 //Long empId , String firstName , String lastName

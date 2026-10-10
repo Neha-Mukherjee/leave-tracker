@@ -45,4 +45,6 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="manager_id")
     private Employee manager;
+    @Column(nullable = false)
+    private boolean active=true;
 }
